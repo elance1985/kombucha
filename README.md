@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Kombucha
 
-## Getting Started
+Kombucha is a Next.js 14 (App Router) starter focused on a food/wellness brand.
+It includes a minimal blog-ready content setup and a placeholder shop page for
+future e-commerce work.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Next.js 14 with App Router
+- TypeScript
+- Tailwind CSS
+- Google Font via `next/font` (`Lora`)
+
+## Project Structure
+
+```text
+kombucha/
+  app/
+    blog/
+      [slug]/
+        page.tsx      # dynamic article page
+      page.tsx        # blog listing placeholder
+    shop/
+      page.tsx        # e-commerce placeholder
+    globals.css
+    layout.tsx
+    page.tsx          # homepage with hero + article cards
+  content/
+    posts/            # reserved for markdown/mdx content
+  lib/
+    content.ts        # placeholder content source
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `/` homepage with hero section and placeholder articles grid
+- `/blog` placeholder blog listing
+- `/blog/[slug]` dynamic blog post page
+- `/shop` coming soon page
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Local Development
 
-## Learn More
+Install dependencies and run the dev server:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Next Steps
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Replace `lib/content.ts` with MDX files or a CMS-backed source
+- Add product models and cart flows under a future shop module
+- Add shared components (header/footer/navigation) as the app grows
