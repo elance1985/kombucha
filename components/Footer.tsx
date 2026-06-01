@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const exploreLinks = [
   { href: "/blog", label: "Blog" },
-  { href: "#ricette", label: "Ricette" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#ricette", label: "Ricette" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 const shopLinks = [
