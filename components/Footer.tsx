@@ -1,4 +1,4 @@
-import Image from "next/image";
+import BrandLogo from "@/components/BrandLogo";
 import Link from "next/link";
 
 const exploreLinks = [
@@ -54,13 +54,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
           <div>
             <Link href="/" className="inline-block transition-opacity hover:opacity-80">
-              <Image
-                src="/logo-icon.png"
-                alt="Mondo Kombucha"
-                width={64}
-                height={64}
-                className="h-14 w-14 brightness-0 invert"
-              />
+              <BrandLogo variant="footer" />
             </Link>
           </div>
 

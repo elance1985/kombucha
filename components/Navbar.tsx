@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import BrandLogo from "@/components/BrandLogo";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
@@ -92,20 +92,10 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-gray-100 bg-white">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6 md:py-4">
-        <Link
-          href="/"
-          className="relative z-[60] flex shrink-0 items-center transition-opacity hover:opacity-80"
+        <BrandLogo
           onClick={closeMenu}
-        >
-          <Image
-            src="/logo.png"
-            alt="Mondo Kombucha"
-            width={180}
-            height={48}
-            className="h-10 w-auto md:h-12"
-            priority
-          />
-        </Link>
+          className="relative z-[60]"
+        />
 
         {/* Desktop navigation */}
         <ul className="hidden items-center gap-8 md:flex">
