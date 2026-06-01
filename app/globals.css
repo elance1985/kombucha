@@ -2,20 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --kombucha-cream: #f7f4ee;
-  --kombucha-ink: #1f2937;
-  --kombucha-sage: #deeadf;
-  --kombucha-teal: #2f5d62;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--kombucha-ink);
-  background-color: var(--kombucha-cream);
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  color: #333333;
+  background-color: #ffffff;
 }
