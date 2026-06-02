@@ -6,9 +6,14 @@ function KombuchaJarIcon() {
       viewBox="0 0 120 160"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-32 w-24 text-brand-green opacity-60 md:h-40 md:w-28"
+      className="hero-jar h-32 w-24 text-brand-green opacity-60 md:h-40 md:w-28"
       aria-hidden
     >
+      <defs>
+        <clipPath id="jar-liquid-clip">
+          <path d="M40 50h40v85c0 5-4 9-9 9H49c-5 0-9-4-9-9V50z" />
+        </clipPath>
+      </defs>
       <rect
         x="30"
         y="20"
@@ -28,9 +33,54 @@ function KombuchaJarIcon() {
         fill="currentColor"
         opacity="0.35"
       />
-      <circle cx="52" cy="70" r="4" fill="#FFC107" opacity="0.8" />
-      <circle cx="68" cy="85" r="3" fill="#FFC107" opacity="0.6" />
-      <circle cx="58" cy="100" r="5" fill="#FFC107" opacity="0.7" />
+      <g clipPath="url(#jar-liquid-clip)">
+        <circle cx="50" cy="118" r="3.2" fill="#FFC107" opacity="0.9">
+          <animate
+            attributeName="cy"
+            values="118;78;58;118"
+            dur="2.5s"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="opacity"
+            values="0.45;1;0.28;0.45"
+            dur="2.5s"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <circle cx="60" cy="126" r="4" fill="#FFC107" opacity="0.86">
+          <animate
+            attributeName="cy"
+            values="126;92;66;126"
+            dur="2.2s"
+            begin="0.25s"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="opacity"
+            values="0.42;0.95;0.24;0.42"
+            dur="2.2s"
+            begin="0.25s"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <circle cx="69" cy="122" r="2.9" fill="#FFC107" opacity="0.84">
+          <animate
+            attributeName="cy"
+            values="122;88;62;122"
+            dur="2.8s"
+            begin="0.55s"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="opacity"
+            values="0.4;0.92;0.22;0.4"
+            dur="2.8s"
+            begin="0.55s"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </g>
       <ellipse
         cx="60"
         cy="130"
