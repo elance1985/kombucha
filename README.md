@@ -78,7 +78,7 @@ npm run test:e2e:open
 
 ## Pull Request Blocking Checks
 
-On every pull request to `main`, GitHub Actions runs:
+On every pull request to `master`, GitHub Actions runs:
 
 1. `npm run lint`
 2. `npm run build`
