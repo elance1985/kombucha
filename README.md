@@ -49,6 +49,46 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Testing Strategy (simple + critical)
+
+This project uses Cypress as the only testing tool, focused on critical user flows:
+
+- homepage render + primary CTA
+- mobile navbar hamburger interaction
+- blog route render
+- shop route render
+
+### Run Cypress locally
+
+```bash
+npm run test
+```
+
+Run all E2E specs:
+
+```bash
+npm run test:e2e
+```
+
+Interactive mode:
+
+```bash
+npm run test:e2e:open
+```
+
+## Pull Request Blocking Checks
+
+On every pull request to `main`, GitHub Actions runs:
+
+1. `npm run lint`
+2. `npm run build`
+3. Cypress critical E2E flows
+
+Workflow file: `.github/workflows/pr-checks.yml`
+
+To make it strictly blocking in GitHub UI, set this workflow status as **Required** in:
+`Settings -> Branches -> Branch protection rules -> Require status checks`.
+
 ## Next Steps
 
 - Replace `lib/content.ts` with MDX files or a CMS-backed source

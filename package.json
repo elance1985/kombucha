@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "dev:test": "next dev -p 3100",
     "lint": "next lint",
+    "test": "start-server-and-test dev:test http://localhost:3100 \"cypress run --config baseUrl=http://localhost:3100 --spec cypress/e2e/critical-flows.cy.ts\"",
+    "test:e2e": "start-server-and-test dev:test http://localhost:3100 \"cypress run --config baseUrl=http://localhost:3100\"",
+    "test:e2e:open": "cypress open",
     "process-logos": "node scripts/process-logos.mjs"
   },
   "dependencies": {
@@ -18,10 +22,12 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cypress": "^15.16.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
     "sharp": "^0.34.5",
+    "start-server-and-test": "^3.0.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
