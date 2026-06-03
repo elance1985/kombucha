@@ -1,40 +1,74 @@
-export type Post = {
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+
+const postsDirectory = path.join(process.cwd(), "content", "posts");
+
+export type PostMeta = {
   slug: string;
   title: string;
   excerpt: string;
-  content: string;
   category: string;
+  draft: boolean;
+  subtitle?: string;
+  readingTime?: string;
+  level?: string;
 };
 
-export const featuredPosts: Post[] = [
-  {
-    slug: "first-brew",
-    title: "La tua prima kombucha fatta in casa",
-    excerpt:
-      "Una guida rilassata per preparare il tuo primo lotto frizzante nel weekend.",
-    category: "Basi della fermentazione",
-    content:
-      "Inizia con attrezzatura pulita, tè di qualità e uno Scoby sano. Questo articolo segnaposto sarà sostituito in futuro da contenuti MDX o da un CMS.",
-  },
-  {
-    slug: "gut-friendly-routines",
-    title: "Routine mattutine amiche del benessere",
-    excerpt: "Tre piccole abitudini da abbinare al tuo bicchiere quotidiano.",
-    category: "Benessere",
-    content:
-      "Mantieni le routine semplici e sostenibili. Questo post segnaposto è qui per permettere di costruire le pagine del blog ora e collegarle ai contenuti reali in seguito.",
-  },
-  {
-    slug: "seasonal-flavors",
-    title: "Abbinamenti di sapori stagionali",
-    excerpt:
-      "Idee fresche per note di fermentazione primaverili ed estive.",
-    category: "Ricette",
-    content:
-      "Frutta, erbe e spezie possono modellare il sapore in modo naturale. Questo testo segnaposto è un sostituto temporaneo per i futuri contenuti editoriali.",
-  },
-];
+export type Post = PostMeta & {
+  content: string;
+};
+
+type PostFrontmatter = {
+  title: string;
+  excerpt: string;
+  category: string;
+  draft?: boolean;
+  slug?: string;
+  subtitle?: string;
+  readingTime?: string;
+  level?: string;
+};
+
+function listMdxFilenames(): string[] {
+  return fs
+    .readdirSync(postsDirectory)
+    .filter((name) => name.endsWith(".mdx"));
+}
+
+function readPostFile(filename: string): Post {
+  const fileSlug = filename.replace(/\.mdx$/, "");
+  const filePath = path.join(postsDirectory, filename);
+  const { data, content } = matter(fs.readFileSync(filePath, "utf8"));
+  const frontmatter = data as PostFrontmatter;
+
+  return {
+    slug: frontmatter.slug ?? fileSlug,
+    title: frontmatter.title,
+    excerpt: frontmatter.excerpt,
+    category: frontmatter.category,
+    draft: frontmatter.draft ?? false,
+    subtitle: frontmatter.subtitle,
+    readingTime: frontmatter.readingTime,
+    level: frontmatter.level,
+    content: content.trim(),
+  };
+}
+
+export function getAllPosts(): PostMeta[] {
+  return listMdxFilenames()
+    .map((filename) => {
+      const post = readPostFile(filename);
+      const { content: _content, ...meta } = post;
+      return meta;
+    })
+    .sort((a, b) => a.title.localeCompare(b.title, "it"));
+}
 
 export function getPostBySlug(slug: string): Post | undefined {
-  return featuredPosts.find((post) => post.slug === slug);
+  const filename = `${slug}.mdx`;
+  if (!listMdxFilenames().includes(filename)) {
+    return undefined;
+  }
+  return readPostFile(filename);
 }

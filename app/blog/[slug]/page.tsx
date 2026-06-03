@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ArticleMeta from "@/components/ArticleMeta";
 import PageShell from "@/components/PageShell";
-import { featuredPosts, getPostBySlug } from "@/lib/content";
+import { getAllPosts, getPostBySlug } from "@/lib/content";
+import { compilePostMdx } from "@/lib/mdx";
 
 type BlogPostPageProps = {
   params: {
@@ -10,7 +12,7 @@ type BlogPostPageProps = {
 };
 
 export function generateStaticParams() {
-  return featuredPosts.map((post) => ({ slug: post.slug }));
+  return getAllPosts().map((post) => ({ slug: post.slug }));
 }
 
 export function generateMetadata({ params }: BlogPostPageProps) {
@@ -22,12 +24,14 @@ export function generateMetadata({ params }: BlogPostPageProps) {
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = getPostBySlug(params.slug);
 
   if (!post) {
     notFound();
   }
+
+  const body = await compilePostMdx(post.content);
 
   return (
     <PageShell className="bg-white">
@@ -46,13 +50,18 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           <h1 className="mt-3 text-3xl font-bold leading-tight text-brand-charcoal md:text-4xl">
             {post.title}
           </h1>
-          <p className="mt-2 text-sm text-brand-amber font-semibold uppercase tracking-wide">
-            Anteprima — contenuto completo in arrivo
-          </p>
-          <div className="mt-8 rounded-xl border border-gray-100 bg-brand-light p-6 md:p-8">
-            <p className="text-base leading-relaxed text-brand-charcoal/80 md:text-lg">
-              {post.content}
+          {post.draft ? (
+            <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-brand-amber">
+              Anteprima — contenuto completo in arrivo
             </p>
+          ) : null}
+          <ArticleMeta
+            subtitle={post.subtitle}
+            readingTime={post.readingTime}
+            level={post.level}
+          />
+          <div className="mt-8 rounded-xl border border-gray-100 bg-brand-light p-6 md:p-8">
+            {body}
           </div>
         </article>
 
