@@ -14,9 +14,12 @@
     "process-logos": "node scripts/process-logos.mjs"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "next": "14.2.5",
+    "next-mdx-remote": "^6.0.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

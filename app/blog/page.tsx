@@ -1,6 +1,6 @@
 import Link from "next/link";
 import PageShell from "@/components/PageShell";
-import { featuredPosts } from "@/lib/content";
+import { getAllPosts } from "@/lib/content";
 
 export const metadata = {
   title: "Blog — Mondo Kombucha",
@@ -27,7 +27,7 @@ export default function BlogIndexPage() {
         </div>
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
-          {featuredPosts.map((post) => (
+          {getAllPosts().map((post) => (
             <article
               key={post.slug}
               className="group flex flex-col rounded-xl border-t-4 border-brand-green bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
@@ -41,14 +41,16 @@ export default function BlogIndexPage() {
               <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-charcoal/70">
                 {post.excerpt}
               </p>
-              <span className="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-brand-amber">
-                Presto disponibile
-              </span>
+              {post.draft ? (
+                <span className="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-brand-amber">
+                  Presto disponibile
+                </span>
+              ) : null}
               <Link
                 href={`/blog/${post.slug}`}
                 className="mt-3 text-sm font-medium text-brand-green transition-colors group-hover:underline"
               >
-                Anteprima articolo →
+                {post.draft ? "Anteprima articolo →" : "Leggi articolo →"}
               </Link>
             </article>
           ))}

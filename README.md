@@ -28,7 +28,9 @@ kombucha/
   content/
     posts/            # reserved for markdown/mdx content
   lib/
-    content.ts        # placeholder content source
+    content.ts        # reads MDX posts from content/posts
+    mdx.ts            # compiles MDX body for blog pages
+  mdx-components.tsx  # styles for rendered MDX elements
 ```
 
 ## Routes
@@ -89,8 +91,28 @@ Workflow file: `.github/workflows/pr-checks.yml`
 To make it strictly blocking in GitHub UI, set this workflow status as **Required** in:
 `Settings -> Branches -> Branch protection rules -> Require status checks`.
 
+## Blog content (MDX)
+
+Add a file under `content/posts/<slug>.mdx` with YAML frontmatter:
+
+```mdx
+---
+title: Titolo dell'articolo
+excerpt: Breve descrizione per l'elenco del blog
+category: Ricette
+draft: false
+subtitle: Sottotitolo opzionale
+readingTime: Circa 10 min di lettura
+level: Principiante
+---
+
+Il corpo dell'articolo in **Markdown** o MDX.
+```
+
+- `slug` comes from the filename (`first-brew.mdx` → `/blog/first-brew`)
+- Set `draft: false` when the article is ready to publish (hides preview badges)
+
 ## Next Steps
 
-- Replace `lib/content.ts` with MDX files or a CMS-backed source
 - Add product models and cart flows under a future shop module
 - Add shared components (header/footer/navigation) as the app grows
