@@ -11,3 +11,128 @@ body {
   background-color: #ffffff;
 }
 
+/* MailerLite embed overrides — match site newsletter design */
+#newsletter .newsletter-form .ml-form-embedContainer {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+#newsletter .newsletter-form .ml-form-embedWrapper {
+  background: transparent !important;
+  border: none !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+#newsletter .newsletter-form .ml-form-embedContent {
+  display: none !important;
+}
+
+#newsletter .newsletter-form .ml-form-embedBody,
+#newsletter .newsletter-form .ml-form-successBody {
+  padding: 0 !important;
+}
+
+#newsletter .newsletter-form form.ml-block-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  #newsletter .newsletter-form form.ml-block-form {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+
+  #newsletter .newsletter-form .ml-form-formContent {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #newsletter .newsletter-form .ml-form-embedSubmit {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  #newsletter .newsletter-form .ml-form-recaptcha {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+#newsletter .newsletter-form .ml-form-formContent,
+#newsletter .newsletter-form .ml-form-fieldRow,
+#newsletter .newsletter-form .ml-form-embedSubmit {
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+#newsletter .newsletter-form input[type="email"] {
+  border-radius: 9999px !important;
+  border-color: #e5e7eb !important;
+  padding: 0.75rem 1.25rem !important;
+  font-size: 0.875rem !important;
+  font-family: var(--font-poppins), sans-serif !important;
+  color: #333333 !important;
+  box-shadow: none !important;
+}
+
+#newsletter .newsletter-form input[type="email"]:focus {
+  border-color: #4caf50 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgb(76 175 80 / 0.2) !important;
+}
+
+#newsletter .newsletter-form .ml-form-embedSubmit button[type="submit"] {
+  border-radius: 9999px !important;
+  background-color: #4caf50 !important;
+  border: none !important;
+  padding: 0.75rem 1.5rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  font-family: var(--font-poppins), sans-serif !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+}
+
+#newsletter .newsletter-form .ml-form-embedSubmit button[type="submit"]:hover {
+  background-color: #43a047 !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+}
+
+#newsletter .newsletter-form .ml-form-recaptcha {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0 !important;
+  float: none !important;
+}
+
+#newsletter .newsletter-form .ml-form-successContent h4,
+#newsletter .newsletter-form .ml-form-successContent p {
+  font-family: var(--font-poppins), sans-serif !important;
+  color: #333333 !important;
+  text-align: center !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+
+#newsletter .newsletter-form .ml-form-successContent h4::after {
+  content: "Grazie!";
+  display: block;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  line-height: 2rem !important;
+  color: #333333 !important;
+}
+
+#newsletter .newsletter-form .ml-form-successContent p::after {
+  content: "Ti sei iscritto con successo alla nostra newsletter.";
+  display: block;
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5rem !important;
+  color: rgb(51 51 51 / 0.75) !important;
+  margin-top: 0.5rem;
+}
+
