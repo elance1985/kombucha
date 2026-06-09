@@ -1,4 +1,8 @@
 import { publishedPosts, criticalPosts } from "../fixtures/critical-posts";
+import {
+  articleCrossLinks,
+  homepageGuideLinks,
+} from "../fixtures/critical-links";
 
 describe("Critical user flows", () => {
   it("renders homepage and key CTA", () => {
@@ -53,6 +57,39 @@ describe("Critical user flows", () => {
     cy.url().should("include", `/blog/${post.slug}`);
     cy.contains("h1", post.title).should("be.visible");
     cy.contains("Anteprima — contenuto completo in arrivo").should("not.exist");
+  });
+
+  it("navigates from homepage to dove-comprarla chapter", () => {
+    cy.visit("/#ricette");
+    cy.contains("a", "Dove Comprarla").click();
+    cy.url().should(
+      "include",
+      "/blog/kombucha-cose-davvero#dove-comprarla"
+    );
+    cy.get("#dove-comprarla").should("exist");
+    cy.contains("h1", "Kombucha: cos'è davvero").should("be.visible");
+    cy.contains(
+      "h3",
+      "La kombucha del Lidl o di Esselunga è davvero kombucha?"
+    ).should("be.visible");
+  });
+
+  homepageGuideLinks.forEach((guide) => {
+    it(`navigates from homepage to guide: ${guide.cardTitle}`, () => {
+      cy.visit("/#ricette");
+      cy.get("#ricette").contains("h3", guide.cardTitle).click();
+      cy.url().should("include", guide.expectedUrl);
+      cy.contains("h1", guide.articleTitle).should("be.visible");
+    });
+  });
+
+  articleCrossLinks.forEach((crossLink) => {
+    it(`cross-links from ${crossLink.fromSlug} to ${crossLink.toSlug}`, () => {
+      cy.visit(`/blog/${crossLink.fromSlug}`);
+      cy.contains("a", crossLink.linkText).click();
+      cy.url().should("include", `/blog/${crossLink.toSlug}`);
+      cy.contains("h1", crossLink.toTitle).should("be.visible");
+    });
   });
 
   it("renders shop page with coming soon messaging", () => {

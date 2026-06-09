@@ -59,12 +59,17 @@ This project uses Cypress as the only testing tool, focused on critical user flo
 - mobile navbar hamburger interaction
 - blog listing and navigation to a published article
 - published blog articles (parametrized via `cypress/fixtures/critical-posts.ts`)
+- homepage guide cards (Benefici, Cos'è) and dove-comprarla chapter navigation
+- article cross-links between published guides (`cypress/fixtures/critical-links.ts`)
 - one draft article smoke test with preview badge
 - shop route render
 - newsletter section copy, MailerLite embed wiring, and Italian success message
 
 When you publish a new article, add it to `cypress/fixtures/critical-posts.ts`
 with `published: true` instead of creating a new dedicated spec.
+
+When you add interlinks between articles or new homepage guide cards, update
+`cypress/fixtures/critical-links.ts` so cross-navigation stays covered.
 
 ### Run Cypress locally
 
