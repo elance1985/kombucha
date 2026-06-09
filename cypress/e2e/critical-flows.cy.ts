@@ -26,6 +26,20 @@ describe("Critical user flows", () => {
     cy.contains("a", "Torna al blog").should("be.visible");
   });
 
+  it("opens the published kombucha benefici article", () => {
+    cy.visit("/blog/kombucha-benefici");
+    cy.contains(
+      "h1",
+      "Kombucha benefici: cosa dice davvero la scienza"
+    ).should("be.visible");
+    cy.contains(
+      "h2",
+      "1. Come leggere la ricerca scientifica sulla kombucha: una guida rapida"
+    ).should("be.visible");
+    cy.contains("a", "Torna al blog").should("be.visible");
+    cy.contains("Anteprima — contenuto completo in arrivo").should("not.exist");
+  });
+
   it("renders shop page with coming soon messaging", () => {
     cy.visit("/shop");
     cy.contains("h1", "Il nostro Shop apre presto").should("be.visible");
