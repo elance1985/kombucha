@@ -122,10 +122,7 @@ export default function ContentCategories() {
 
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category) => (
-            <li
-              key={category.title}
-              id={category.title === "FAQ" ? "faq" : undefined}
-            >
+            <li key={category.title}>
               <CategoryCard category={category} />
             </li>
           ))}
