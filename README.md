@@ -57,8 +57,14 @@ This project uses Cypress as the only testing tool, focused on critical user flo
 
 - homepage render + primary CTA
 - mobile navbar hamburger interaction
-- blog route render
+- blog listing and navigation to a published article
+- published blog articles (parametrized via `cypress/fixtures/critical-posts.ts`)
+- one draft article smoke test with preview badge
 - shop route render
+- newsletter section copy, MailerLite embed wiring, and Italian success message
+
+When you publish a new article, add it to `cypress/fixtures/critical-posts.ts`
+with `published: true` instead of creating a new dedicated spec.
 
 ### Run Cypress locally
 

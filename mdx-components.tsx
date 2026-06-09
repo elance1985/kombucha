@@ -61,7 +61,7 @@ export const mdxComponents: MDXComponents = {
     </blockquote>
   ),
   img: ({ alt, src }) => (
-    <figure className="my-8">
+    <div className="my-8">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
@@ -69,6 +69,6 @@ export const mdxComponents: MDXComponents = {
         className="w-full rounded-xl border border-gray-100 shadow-sm"
         loading="lazy"
       />
-    </figure>
+    </div>
   ),
 };

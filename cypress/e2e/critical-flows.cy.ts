@@ -1,3 +1,5 @@
+import { publishedPosts, criticalPosts } from "../fixtures/critical-posts";
+
 describe("Critical user flows", () => {
   it("renders homepage and key CTA", () => {
     cy.visit("/");
@@ -20,10 +22,37 @@ describe("Critical user flows", () => {
     cy.contains("h1", "Guide e articoli sulla kombucha").should("be.visible");
   });
 
-  it("opens a critical blog article route", () => {
-    cy.visit("/blog/first-brew");
-    cy.contains("h1", "La tua prima kombucha fatta in casa").should("be.visible");
+  publishedPosts.forEach((post) => {
+    it(`opens published article: ${post.slug}`, () => {
+      cy.visit(`/blog/${post.slug}`);
+      cy.contains("h1", post.title).should("be.visible");
+      cy.contains("h2", post.section).should("be.visible");
+      cy.contains("a", "Torna al blog").should("be.visible");
+      cy.contains("Anteprima — contenuto completo in arrivo").should(
+        "not.exist"
+      );
+    });
+  });
+
+  it("opens a draft blog article with preview badge", () => {
+    const draftPost = criticalPosts.find((post) => !post.published);
+    cy.visit(`/blog/${draftPost!.slug}`);
+    cy.contains("h1", draftPost!.title).should("be.visible");
     cy.contains("a", "Torna al blog").should("be.visible");
+    cy.contains("Anteprima — contenuto completo in arrivo").should(
+      "be.visible"
+    );
+  });
+
+  it("navigates from blog index to a published article", () => {
+    const post = publishedPosts[0];
+    cy.visit("/blog");
+    cy.contains("article", post.title)
+      .contains("a", "Leggi articolo →")
+      .click();
+    cy.url().should("include", `/blog/${post.slug}`);
+    cy.contains("h1", post.title).should("be.visible");
+    cy.contains("Anteprima — contenuto completo in arrivo").should("not.exist");
   });
 
   it("renders shop page with coming soon messaging", () => {
