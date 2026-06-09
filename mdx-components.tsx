@@ -2,13 +2,19 @@ import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 
 export const mdxComponents: MDXComponents = {
-  h2: ({ children }) => (
-    <h2 className="mt-8 text-2xl font-bold text-brand-charcoal first:mt-0">
+  h2: ({ children, id }) => (
+    <h2
+      id={id}
+      className="scroll-mt-24 mt-8 text-2xl font-bold text-brand-charcoal first:mt-0"
+    >
       {children}
     </h2>
   ),
-  h3: ({ children }) => (
-    <h3 className="mt-6 text-xl font-semibold text-brand-charcoal">
+  h3: ({ children, id }) => (
+    <h3
+      id={id}
+      className="scroll-mt-24 mt-6 text-xl font-semibold text-brand-charcoal"
+    >
       {children}
     </h3>
   ),

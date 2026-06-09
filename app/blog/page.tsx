@@ -2,13 +2,25 @@ import Link from "next/link";
 import PageShell from "@/components/PageShell";
 import { getAllPosts } from "@/lib/content";
 
-export const metadata = {
-  title: "Blog — Mondo Kombucha",
-  description:
-    "Articoli e guide sulla kombucha in italiano. Contenuti in arrivo presto.",
-};
+export function generateMetadata() {
+  const publishedCount = getAllPosts().filter((post) => !post.draft).length;
+
+  const description =
+    publishedCount > 0
+      ? `Guide e articoli sulla kombucha in italiano. ${publishedCount} guide complete disponibili — ricette e altri contenuti in arrivo.`
+      : "Articoli e guide sulla kombucha in italiano.";
+
+  return {
+    title: "Blog — Mondo Kombucha",
+    description,
+  };
+}
 
 export default function BlogIndexPage() {
+  const posts = getAllPosts();
+  const publishedCount = posts.filter((post) => !post.draft).length;
+  const hasDrafts = posts.some((post) => post.draft);
+
   return (
     <PageShell className="bg-brand-light">
       <main className="mx-auto max-w-5xl px-4 py-12 md:px-6 md:py-16">
@@ -20,14 +32,34 @@ export default function BlogIndexPage() {
             Guide e articoli sulla kombucha
           </h1>
           <p className="mt-4 text-base leading-relaxed text-brand-charcoal/75 md:text-lg">
-            Stiamo preparando articoli approfonditi, ricette e consigli per
-            principianti. Nel frattempo, ecco un&apos;anteprima di cosa troverai
-            presto.
+            {publishedCount > 0 ? (
+              <>
+                {publishedCount === 1
+                  ? "Una guida approfondita è già disponibile"
+                  : `${publishedCount} guide approfondite sono già disponibili`}
+                {" — "}
+                su cos&apos;è la kombucha, i benefici documentati e molto altro.
+                {hasDrafts ? (
+                  <>
+                    {" "}
+                    Stiamo preparando altre ricette e consigli per
+                    principianti: gli articoli in lavorazione sono contrassegnati
+                    «Presto disponibile».
+                  </>
+                ) : null}
+              </>
+            ) : (
+              <>
+                Stiamo preparando articoli approfonditi, ricette e consigli per
+                principianti. Nel frattempo, ecco un&apos;anteprima di cosa
+                troverai presto.
+              </>
+            )}
           </p>
         </div>
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
-          {getAllPosts().map((post) => (
+          {posts.map((post) => (
             <article
               key={post.slug}
               className="group flex flex-col rounded-xl border-t-4 border-brand-green bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"

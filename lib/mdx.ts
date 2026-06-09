@@ -1,4 +1,5 @@
 import { compileMDX } from "next-mdx-remote/rsc";
+import rehypeSlug from "rehype-slug";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import remarkGfm from "remark-gfm";
 import { mdxComponents } from "@/mdx-components";
@@ -10,7 +11,7 @@ export async function compilePostMdx(source: string) {
     options: {
       mdxOptions: {
         remarkPlugins: [remarkGfm],
-        rehypePlugins: [rehypeUnwrapImages],
+        rehypePlugins: [rehypeUnwrapImages, rehypeSlug],
       },
     },
   });
